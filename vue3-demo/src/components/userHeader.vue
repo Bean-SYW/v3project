@@ -1,14 +1,12 @@
 <template>
-  <div></div>
+  <div>userHeader</div>
 </template>
 
 <script setup lang="ts">
-import { userStore } from '../stores/userStore'
 
 import { ref } from 'vue';
 
-const store = userStore();
 
 </script>
 
-<style scoped></style>
+<style scoped></style>../stores/moldules/userStore

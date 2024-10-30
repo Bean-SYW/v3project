@@ -1,26 +1,20 @@
 <template>
-  <el-container>
-    <template v-if="!hidden">
-      <slot name="header">
-        <el-header>Header</el-header>
-      </slot>
-    </template>
-
-    <el-main>
-      <slot></slot>
-    </el-main>
-    <el-footer>Footer</el-footer>
-  </el-container>
+  <div class="common-layout">
+    <el-container>
+      <el-header>
+        <slot name="header">
+          <UserHeader />
+        </slot>
+      </el-header>
+      <el-main>
+        <slot></slot>
+      </el-main>
+    </el-container>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-const props = defineProps(['hiddenHeader']);
 
-const hidden = ref(props.hiddenHeader || props.hiddenHeader === '');
-
-
-console.log(props)
 </script>
 
 <style scoped></style>

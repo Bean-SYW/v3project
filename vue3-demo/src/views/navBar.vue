@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="4" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+  <el-menu default-active="4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
     <el-menu-item index="1">
       <el-icon><icon-menu /></el-icon>
       <span>Navigator Two</span>

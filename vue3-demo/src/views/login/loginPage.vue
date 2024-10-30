@@ -11,7 +11,7 @@
     </el-form-item>
     <el-form-item prop="remember">
       <div class="flex-between">
-        <el-checkbox v-model="ruleForm.remember" label="记住我" size="large" />
+        <el-checkbox v-model="remember" label="记住我" size="large" />
         <el-buttom>忘记密码 ？</el-buttom>
       </div>
     </el-form-item>
@@ -27,24 +27,22 @@ import { reactive, ref } from 'vue'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import { onLogin } from '@/request/url'
 import { useRouter } from 'vue-router'
-import { userStore } from '@/stores/userStore'
+
+type RuleForm = {
+  username: string,
+  password: string
+}
 
 const router = useRouter()
-const store = userStore()
-
-interface RuleForm {
-  username: string
-  password: string
-  remember: boolean
-}
 
 const formSize = ref<ComponentSize>('default')
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive<RuleForm>({
   username: '',
-  password: '',
-  remember: false
+  password: ''
 })
+
+const remember = ref(false);
 
 const rules = reactive<FormRules<RuleForm>>({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -59,13 +57,12 @@ const rules = reactive<FormRules<RuleForm>>({
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  await formEl.validate((valid, fields) => {
+  await formEl.validate((valid) => {
     if (valid) {
       onLogin(ruleForm).then((res) => {
         if (res) {
-          localStorage.setItem("Authorization", res.data);
-          store.userInfo.username = ruleForm.username;
-          router.push("/home/user")
+          localStorage.setItem('Authorization', res.data)
+          router.push('/home/user')
         }
       })
     }
